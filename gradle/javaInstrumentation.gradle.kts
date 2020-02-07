@@ -27,7 +27,7 @@ fun Project.configureJavaInstrumentation() {
 
         listOf(mainSourceSet, testSourceSet).forEach { sourceSet ->
              tasks.named<JavaCompile>(sourceSet.compileJavaTaskName) javaCompile@ {
-                doLast {
+                doLast("instrument java classes") {
                     instrumentClasses(javaInstrumentator.asPath, this@javaCompile, sourceSet)
                 }
             }

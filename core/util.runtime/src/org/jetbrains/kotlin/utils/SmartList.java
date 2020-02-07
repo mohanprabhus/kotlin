@@ -28,7 +28,7 @@ import java.util.*;
  * This class was copied from com.intellij.util.SmartList.
  */
 @SuppressWarnings("unchecked")
-public class SmartList<E> extends AbstractList<E> implements RandomAccess {
+public final class SmartList<E> extends AbstractList<E> implements RandomAccess {
     private int mySize;
     private Object myElem; // null if mySize==0, (E)elem if mySize==1, Object[] if mySize>=2
 
