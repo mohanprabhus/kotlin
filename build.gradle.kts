@@ -29,6 +29,7 @@ buildscript {
 
         classpath("org.jetbrains.kotlin:kotlin-build-gradle-plugin:0.0.17")
         classpath(kotlin("gradle-plugin", bootstrapKotlinVersion))
+        classpath(kotlin("project-build-internal-helper-plugin", bootstrapKotlinVersion))
         classpath("org.jetbrains.dokka:dokka-gradle-plugin:0.9.17")
     }
 }
@@ -148,7 +149,6 @@ fun checkJDK() {
 rootProject.apply {
     from(rootProject.file("gradle/versions.gradle.kts"))
     from(rootProject.file("gradle/report.gradle.kts"))
-    from(rootProject.file("gradle/javaInstrumentation.gradle.kts"))
     from(rootProject.file("gradle/jps.gradle.kts"))
     from(rootProject.file("gradle/checkArtifacts.gradle.kts"))
     from(rootProject.file("gradle/checkCacheability.gradle.kts"))
@@ -962,6 +962,8 @@ fun jdkPath(version: String, vararg replacementVersions: String): String {
 }
 
 fun Project.configureJvmProject(javaHome: String, javaVersion: String) {
+    plugins.apply("org.jetbrains.kotlin.internal.build.not.null.instrumentation")
+
     val currentJavaHome = File(System.getProperty("java.home")!!).canonicalPath
     val shouldFork = !currentJavaHome.startsWith(File(javaHome).canonicalPath)
 
