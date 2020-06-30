@@ -262,6 +262,11 @@ object BuilderConfigurator : AbstractBuilderConfigurator<FirTreeBuilder>(FirTree
             useTypes(stubReferenceType)
         }
 
+        builder(elvisCall) {
+            default("calleeReference", "FirStubReference")
+            useTypes(stubReferenceType)
+        }
+
         builder(anonymousInitializer) {
             default("symbol", "FirAnonymousInitializerSymbol()")
         }
