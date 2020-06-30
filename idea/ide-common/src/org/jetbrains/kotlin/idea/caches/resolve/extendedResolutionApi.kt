@@ -96,9 +96,8 @@ fun KtElement.analyze(
 ): BindingContext =
     resolutionFacade.analyze(this, bodyResolveMode)
 
-fun KtElement.analyzeAndGetResult(resolutionFacade: ResolutionFacade): AnalysisResult {
-    return AnalysisResult.success(resolutionFacade.analyze(this), resolutionFacade.moduleDescriptor)
-}
+fun KtElement.analyzeAndGetResult(resolutionFacade: ResolutionFacade): AnalysisResult =
+    resolutionFacade.analyzeWithAllCompilerChecks(listOf(this))
 
 // This function is used on declarations to make analysis not only declaration itself but also it content:
 // body for declaration with body, initializer & accessors for properties
