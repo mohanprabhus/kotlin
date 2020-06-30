@@ -143,42 +143,12 @@ fun IElementType.toFirOperation(): FirOperation =
     }
 
 fun FirExpression.generateNotNullOrOther(
-    session: FirSession, other: FirExpression, caseId: String, baseSource: FirSourceElement?,
-): FirWhenExpression {
-    val subjectName = Name.special("<$caseId>")
-    val subjectVariable = generateTemporaryVariable(session, baseSource, subjectName, this)
-
-    @OptIn(FirContractViolation::class)
-    val ref = FirExpressionRef<FirWhenExpression>()
-    val subjectExpression = buildWhenSubjectExpression {
+    other: FirExpression, baseSource: FirSourceElement?,
+): FirElvisCall {
+    return buildElvisCall {
         source = baseSource
-        whenRef = ref
-    }
-
-    return buildWhenExpression {
-        source = baseSource
-        this.subject = this@generateNotNullOrOther
-        this.subjectVariable = subjectVariable
-        branches += buildWhenBranch {
-            source = baseSource
-            condition = buildOperatorCall {
-                source = baseSource
-                operation = FirOperation.EQ
-                argumentList = buildBinaryArgumentList(
-                    subjectExpression, buildConstExpression(baseSource, FirConstKind.Null, null)
-                )
-            }
-            result = buildSingleExpressionBlock(other)
-        }
-        branches += buildWhenBranch {
-            source = other.source
-            condition = buildElseIfTrueCondition {
-                source = baseSource
-            }
-            result = buildSingleExpressionBlock(generateResolvedAccessExpression(baseSource, subjectVariable))
-        }
-    }.also {
-        ref.bind(it)
+        lhs = this@generateNotNullOrOther
+        rhs = other
     }
 }
 
