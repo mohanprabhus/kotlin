@@ -282,6 +282,7 @@ include ":benchmarks",
         ":kotlin-scripting-compiler-impl-embeddable",
         ":kotlin-scripting-ide-services-unshaded",
         ":kotlin-scripting-ide-services-test",
+        ":kotlin-scripting-ide-services-test:kt-35651-test",
         ":kotlin-scripting-ide-services",
         ":kotlin-scripting-dependencies",
         ":kotlin-scripting-dependencies-maven",
@@ -518,6 +519,7 @@ project(':kotlin-scripting-compiler-impl').projectDir = "$rootDir/plugins/script
 project(':kotlin-scripting-compiler-impl-embeddable').projectDir = "$rootDir/plugins/scripting/scripting-compiler-impl-embeddable" as File
 project(':kotlin-scripting-ide-services-unshaded').projectDir = "$rootDir/plugins/scripting/scripting-ide-services" as File
 project(':kotlin-scripting-ide-services-test').projectDir = "$rootDir/plugins/scripting/scripting-ide-services-test" as File
+project(':kotlin-scripting-ide-services-test:kt-35651-test').projectDir = "$rootDir/plugins/scripting/scripting-ide-services-test/kt-35651-test" as File
 project(':kotlin-scripting-ide-services').projectDir = "$rootDir/plugins/scripting/scripting-ide-services-embeddable" as File
 project(':kotlin-scripting-idea').projectDir = "$rootDir/plugins/scripting/scripting-idea" as File
 project(':kotlin-main-kts').projectDir = "$rootDir/libraries/tools/kotlin-main-kts" as File

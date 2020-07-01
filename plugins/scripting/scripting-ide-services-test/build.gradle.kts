@@ -23,6 +23,7 @@ dependencies {
     testCompile(project(":kotlin-scripting-dependencies"))
     testCompile(project(":kotlin-main-kts"))
     testCompile(project(":compiler:cli-common"))
+    testCompile(project(":kotlin-scripting-ide-services-test:kt-35651-test"))
 
     testRuntimeOnly(project(":kotlin-compiler"))
     testRuntimeOnly(commonDep("org.jetbrains.intellij.deps", "trove4j"))
@@ -40,6 +41,12 @@ sourceSets {
 
 tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>> {
     kotlinOptions.freeCompilerArgs += "-Xallow-kotlin-package"
+}
+
+tasks {
+    test {
+        dependsOn(":kotlin-scripting-ide-services-test:kt-35651-test:jar")
+    }
 }
 
 projectTest(parallel = true) {

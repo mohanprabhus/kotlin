@@ -288,15 +288,9 @@ class JvmIdeServicesTest : TestCase() {
 
         JvmTestRepl(conf)
             .use { repl ->
-                /*
-                    The only source file in test.jar contains following code:
-
-                    package example.dependency
-                    infix fun String.to(that: String) = this + that
-                 */
                 assertEvalUnit(
                     repl, """
-                        @file:DependsOn("plugins/scripting/scripting-ide-services-test/testData/KT-35651-test.jar")
+                        @file:DependsOn("plugins/scripting/scripting-ide-services-test/kt-35651-test/build/libs/artifact-1.jar")
                         import example.dependency.*
                         
                         val x = listOf<String>()
